@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ss_background"
+    tools:context=".LoginActivity">
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edEmail"
+                app:layout_constraintTop_toBottomOf="@id/guidelineTop"
+                app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+                android:hint="Enter Email"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edPassword"
+            app:layout_constraintTop_toBottomOf="@id/edEmail"
+            app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+            android:hint="Enter Pasword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:id="@+id/checkbox"
+                app:layout_constraintTop_toBottomOf="@id/edPassword"
+                app:layout_constraintStart_toEndOf="@id/guidelineLeft" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:text="Keep me Signed in"
+                app:layout_constraintStart_toEndOf="@id/checkbox"
+                app:layout_constraintTop_toBottomOf="@id/edPassword"
+                android:textColor="@color/white"
+                android:layout_marginTop="13dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:text="Sign in"
+                android:id="@+id/btnSignIn"
+                app:layout_constraintTop_toBottomOf="@id/checkbox"
+                app:layout_constraintStart_toEndOf="@id/guidelineLeft"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+                android:background="@color/white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@id/btnSignIn"
+                app:layout_constraintStart_toEndOf="@id/guidelineFarLeft"
+            app:layout_constraintEnd_toStartOf="@id/guidelineFarRight"
+                />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:text="Forgot Password"
+            android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/guidelineBottom"
+                app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+            android:text="Register"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+                android:orientation="vertical"
+            android:id="@+id/guidelineFarLeft"
+
+            app:layout_constraintGuide_percent=".10"
+                />
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/guidelineFarRight"
+            app:layout_constraintGuide_percent=".90"
+            />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".80"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".35"
+            android:id="@+id/guidelineTop"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/guidelineBottom"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65"
+            />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
