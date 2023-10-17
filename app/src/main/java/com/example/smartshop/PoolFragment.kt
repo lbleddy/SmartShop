@@ -44,15 +44,15 @@ class PoolFragment : Fragment() {
 
     private fun getOptionsData():List<Option>{
         return arrayListOf(
-            Option("Phone 1",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 2",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 4",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 5",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 6",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 7",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 8",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 9",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 10",R.drawable.baseline_phone_iphone_24)
+            Option("Pool 1",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 2",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 4",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 5",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 6",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 7",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 8",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 9",R.drawable.baseline_phone_iphone_24),
+            Option("Pool 10",R.drawable.baseline_phone_iphone_24)
 
 
         )
