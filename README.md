@@ -1,3 +1,3 @@
 # SmartShop
 shopper app
-<img src="https://imgur.com/a/WZPytLz.png" width="300">
+<img src="https://imgur.com/a/WZPytLz" width="300">
