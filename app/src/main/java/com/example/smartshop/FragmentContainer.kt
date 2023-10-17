@@ -46,7 +46,9 @@ class FragmentContainer : AppCompatActivity() {
         when(sharedPreferences.getString("email_key","")) {
            "Smart Phones" -> supportFragmentManager.beginTransaction().add(R.id.container, SmartPhonesFragment())
                 .commit()
-            "Pool" -> supportFragmentManager.beginTransaction().add(R.id.container,PoolFragment())
+            "Pool" -> {
+                Log.i("tag","here in pool")
+                supportFragmentManager.beginTransaction().add(R.id.container,PoolFragment()).commit()}
         }
     }
 

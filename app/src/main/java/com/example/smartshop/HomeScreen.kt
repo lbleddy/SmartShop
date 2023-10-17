@@ -7,11 +7,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.view.get
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smartshop.databinding.ActivityHomeScreenBinding
+import org.w3c.dom.Text
 
 
 class HomeScreen : AppCompatActivity() {
@@ -24,14 +27,18 @@ class HomeScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         sharedPreferences  = SecureSharedPref.getSharedPreferences(this.applicationContext)
         initViews()
     }
 
     private fun initViews() {
         val recyclerView = findViewById<RecyclerView>(R.id.lv_options)
-        val adapter = OptionsAdapter(getOptionsData())
-        recyclerView.adapter=adapter
+        recyclerView.adapter = OptionsAdapter(getOptionsData()){item ->
+            Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
+            saveLoginDetails(item.name)
+            startActivity(Intent(this,FragmentContainer::class.java))
+        }
 
 
         recyclerView.setOnTouchListener { view, motionEvent ->
@@ -41,17 +48,31 @@ class HomeScreen : AppCompatActivity() {
                 false
         }
 
-        recyclerView.setOnClickListener {
-        val positionView = findViewById<RecyclerView>(R.id.lv_options).findContainingItemView(it)
-        val currentName = positionView?.transitionName
-             //var adapter = OptionsAdapter(getOptionsData())
-                        //saveLoginDetails(currentName.toString())
-            Log.i("tag","${currentName.toString()}")
-                        //communicator.sendMessage ("${OptionsAdapter(getOptionsData()).getItem(position!!).name}")
-                        startActivity (Intent(this, FragmentContainer::class.java))
-            }
+
+
+
+
+//        val data = getOptionsData()
+//        for (position in 0..9) {
+//            recyclerView[position].setOnClickListener {
+//
+//                saveLoginDetails(
+//                    recyclerView.findViewHolderForAdapterPosition(position)!!.itemView.findViewById<TextView>(
+//                        R.id.optionText
+//                    ).text.toString()
+//                )
+//                //var adapter = OptionsAdapter(getOptionsData())
+//                //saveLoginDetails(currentName.toString())
+//
+//                //communicator.sendMessage ("${OptionsAdapter(getOptionsData()).getItem(position!!).name}")
+//                startActivity(Intent(this, FragmentContainer::class.java))
+//            }
+
         }
+
+
     private fun saveLoginDetails(email: String) {
+        Log.i("tag","$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
 
@@ -92,4 +113,6 @@ class HomeScreen : AppCompatActivity() {
 
         )
     }
+
+
 }

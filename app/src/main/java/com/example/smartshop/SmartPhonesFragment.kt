@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -27,10 +28,13 @@ class SmartPhonesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataList = getOptionsData()
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
-        val adapter = OptionsAdapter(dataList)
-        recyclerView.adapter=adapter
+        recyclerView.adapter = OptionsAdapter(getOptionsData()){item ->
+           // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
     private fun getOptionsData():List<Option>{
