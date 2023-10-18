@@ -17,22 +17,22 @@ class FragmentContainer : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFragmentContainerBinding.inflate(layoutInflater)
-       setContentView(binding.root)
+        setContentView(binding.root)
         sharedPreferences = SecureSharedPref.getSharedPreferences(this.applicationContext)
         initViews()
     }
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData(): List<Option> {
         return arrayListOf(
-            Option("Settings",R.drawable.baseline_settings_24),
-            Option("Browse",R.drawable.baseline_search_24),
-            Option("Smart Phones",R.drawable.baseline_phone_iphone_24),
-            Option("Laptops",R.drawable.baseline_computer_24),
-            Option("Mens Wear",R.drawable.baseline_man_24),
-            Option("Womens Wear",R.drawable.baseline_woman_24),
-            Option("Outdoors",R.drawable.baseline_wb_sunny_24),
-            Option("Pool",R.drawable.baseline_waves_24),
-            Option("Winter",R.drawable.baseline_snowboarding_24)
+            Option("Settings", R.drawable.baseline_settings_24),
+            Option("Browse", R.drawable.baseline_search_24),
+            Option("Smart Phones", R.drawable.baseline_phone_iphone_24),
+            Option("Laptops", R.drawable.baseline_computer_24),
+            Option("Mens Wear", R.drawable.baseline_man_24),
+            Option("Womens Wear", R.drawable.baseline_woman_24),
+            Option("Outdoors", R.drawable.baseline_wb_sunny_24),
+            Option("Pool", R.drawable.baseline_waves_24),
+            Option("Winter", R.drawable.baseline_snowboarding_24)
 
 
         )
@@ -41,15 +41,41 @@ class FragmentContainer : AppCompatActivity() {
     private fun initViews() {
         addNewFragment()
     }
-    private fun addNewFragment() {
-        Log.i("tag","here")
-        when(sharedPreferences.getString("email_key","")) {
-           "Smart Phones" -> supportFragmentManager.beginTransaction().add(R.id.container, SmartPhonesFragment())
-                .commit()
-            "Pool" -> {
-                Log.i("tag","here in pool")
-                supportFragmentManager.beginTransaction().add(R.id.container,PoolFragment()).commit()}
-        }
-    }
 
+    private fun addNewFragment() {
+        Log.i("tag", "here")
+        when (sharedPreferences.getString("email_key", "")) {
+            "Smart Phones" -> supportFragmentManager.beginTransaction()
+                .add(R.id.container, SmartPhonesFragment())
+                .commit()
+
+            "Pool" -> {
+                Log.i("tag", "here in pool")
+                supportFragmentManager.beginTransaction().add(
+                    R.id.container,
+                    PoolFragment()
+                ).commit()
+            }
+
+            "Winter" -> {
+                supportFragmentManager.beginTransaction().add(
+                    R.id.container, WinterFragment()
+                ).commit()
+
+            }
+            "Laptops" -> {
+                supportFragmentManager.beginTransaction().add(R.id.container,LaptopsFragment()).commit()
+            }
+            "Settings" -> {
+                supportFragmentManager.beginTransaction().add(R.id.container,SettingsFragment()).commit()
+            }
+            "Outdoors" -> {
+                supportFragmentManager.beginTransaction().add(R.id.container,OutdoorsFragment()).commit()
+            }
+            "Browse" -> {
+                supportFragmentManager.beginTransaction().add(R.id.container,BrowseFragment()).commit()
+            }
+        }
+
+    }
 }
