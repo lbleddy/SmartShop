@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 /**
  * A simple [Fragment] subclass.
- * Use the [SettingsFragment.newInstance] factory method to
+ * Use the [Pool1Fragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SettingsFragment : Fragment() {
+class Pool1Fragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var communicator: Communicator
 
@@ -57,15 +57,15 @@ class SettingsFragment : Fragment() {
 
     private fun getOptionsData():List<Option>{
         return arrayListOf(
-            Option("Settings 1", R.drawable.baseline_settings_24),
-            Option("Settings 2", R.drawable.baseline_settings_24),
-            Option("Settings 4", R.drawable.baseline_settings_24),
-            Option("Settings 5", R.drawable.baseline_settings_24),
-            Option("Settings 6", R.drawable.baseline_settings_24),
-            Option("Settings 7", R.drawable.baseline_settings_24),
-            Option("Settings 8", R.drawable.baseline_settings_24),
-            Option("Settings 9", R.drawable.baseline_settings_24),
-            Option("Settings 10", R.drawable.baseline_settings_24)
+            Option("Pool 1", R.drawable.baseline_waves_24),
+            Option("Pool 2", R.drawable.baseline_waves_24),
+            Option("Pool 4", R.drawable.baseline_waves_24),
+            Option("Pool 5", R.drawable.baseline_waves_24),
+            Option("Pool 6", R.drawable.baseline_waves_24),
+            Option("Pool 7", R.drawable.baseline_waves_24),
+            Option("Pool 8", R.drawable.baseline_waves_24),
+            Option("Pool 9", R.drawable.baseline_waves_24),
+            Option("Pool 10", R.drawable.baseline_waves_24)
 
 
         )
@@ -78,7 +78,7 @@ class SettingsFragment : Fragment() {
         Log.i("tag","after on Detach")
 
         when(email) {
-            "Settings 1"->{
+            "Pool 1","Pool 2","Pool 4","Pool 5"->{
                 Log.i("tag","here in settings1")
             activity?.run {
                 supportFragmentManager.beginTransaction()

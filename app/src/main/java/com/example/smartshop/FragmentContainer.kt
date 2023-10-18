@@ -79,7 +79,7 @@ class FragmentContainer : AppCompatActivity(),Communicator {
                 Log.i("tag", "here in pool")
                 supportFragmentManager.beginTransaction().add(
                     R.id.container,
-                    PoolFragment()
+                    Pool1Fragment()
                 ).commit()
             }
 
@@ -90,13 +90,13 @@ class FragmentContainer : AppCompatActivity(),Communicator {
 
             }
             "Laptops" -> {
-                supportFragmentManager.beginTransaction().add(R.id.container,LaptopsFragment()).commit()
+                supportFragmentManager.beginTransaction().add(R.id.container,Laptops1Fragment()).commit()
             }
             "Settings" -> {
                 supportFragmentManager.beginTransaction().add(R.id.container,SettingsFragment()).commit()
             }
             "Outdoors" -> {
-                supportFragmentManager.beginTransaction().add(R.id.container,OutdoorsFragment()).commit()
+                supportFragmentManager.beginTransaction().add(R.id.container,Outdoors1Fragment()).commit()
             }
             "Browse" -> {
                 supportFragmentManager.beginTransaction().add(R.id.container,BrowseFragment()).commit()

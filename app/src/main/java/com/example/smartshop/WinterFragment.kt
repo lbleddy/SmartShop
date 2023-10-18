@@ -1,6 +1,9 @@
 package com.example.smartshop
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +21,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class WinterFragment : Fragment() {
-
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        sharedPreferences  = this.requireActivity().getSharedPreferences(HomeScreen.EMAIL_KEY, Context.MODE_PRIVATE)
     }
 
 
@@ -40,6 +43,33 @@ class WinterFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
         recyclerView.adapter = OptionsAdapter(getOptionsData()){item ->
             // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
+            saveLoginDetails(item.name)
+        }
+    }
+    private fun saveLoginDetails(email: String) {
+        Log.i("tag", "$email")
+        val editor = sharedPreferences.edit()
+        editor.putString(HomeScreen.EMAIL_KEY, email)
+        Log.i("tag", "after on Detach")
+
+        when (email) {
+            "Winter 1","Winter 2","Winter 3","Winter 4"
+                ,"Winter 5","Winter 6","Winter 7","Winter 8",
+            "Winter 9","Winter 10"
+            -> {
+
+                Log.i("tag", "here in phones1")
+                activity?.run {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, WinterFragment1()).commit()
+                }
+            }
+
+            "Settings 2" ->
+                activity?.run {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, SettingsFragment2()).commit()
+                }
         }
     }
 
