@@ -1,25 +1,49 @@
 package com.example.smartshop
 
+import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
+import android.os.PersistableBundle
 import android.util.Log
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.recyclerview.widget.RecyclerView
-import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
 import com.example.smartshop.databinding.ActivityFragmentContainerBinding
 
-class FragmentContainer : AppCompatActivity() {
+class FragmentContainer : AppCompatActivity(),Communicator {
     private lateinit var communicator: Communicator
+
     private lateinit var binding: ActivityFragmentContainerBinding
     private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFragmentContainerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        sharedPreferences = SecureSharedPref.getSharedPreferences(this.applicationContext)
+        Log.i("tag","here in onCreate")
+
+            binding = ActivityFragmentContainerBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+            sharedPreferences = SecureSharedPref.getSharedPreferences(this.applicationContext)
+            initViews()
+
+    }
+
+    override fun sendMessage() {
+        Log.i("tag","here in sendMessage")
+        sharedPreferences  = SecureSharedPref.getSharedPreferences(this.applicationContext)
+        addNewFragment()
+    }
+    fun onCreate2(){
+        Log.i("tag","onCreate")
+
+        //sharedPreferences = SecureSharedPref.getSharedPreferences(this.applicationContext)
+        supportFragmentManager.beginTransaction().remove(SettingsFragment()).commitAllowingStateLoss()
+
+        //setContentView(R.layout.activity_fragment_container)
         initViews()
+    }
+
+
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     private fun getOptionsData(): List<Option> {
@@ -38,12 +62,14 @@ class FragmentContainer : AppCompatActivity() {
         )
     }
 
-    private fun initViews() {
+    fun initViews() {
+
         addNewFragment()
     }
 
     private fun addNewFragment() {
         Log.i("tag", "here")
+        Log.i("tag","${sharedPreferences.getString("email_key","")}")
         when (sharedPreferences.getString("email_key", "")) {
             "Smart Phones" -> supportFragmentManager.beginTransaction()
                 .add(R.id.container, SmartPhonesFragment())
@@ -75,7 +101,13 @@ class FragmentContainer : AppCompatActivity() {
             "Browse" -> {
                 supportFragmentManager.beginTransaction().add(R.id.container,BrowseFragment()).commit()
             }
+            "Settings 1" ->{
+                Log.i("tag","here in settings1")
+                supportFragmentManager.beginTransaction().add(R.id.container,SettingsFragment1()).commit()
+            }
         }
 
     }
+
+
 }

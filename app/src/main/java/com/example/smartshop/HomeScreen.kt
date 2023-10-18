@@ -83,6 +83,16 @@ class HomeScreen : AppCompatActivity() {
         }
     }
 
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        }
+
     companion object {
         const val SHARED_PREFERENCE_FILE_NAME = "login_details"
         const val EMAIL_KEY = "email_key"
