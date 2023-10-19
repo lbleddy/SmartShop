@@ -49,47 +49,43 @@ class Laptops1Fragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
         recyclerView.adapter = OptionsAdapter(getOptionsData()) { item ->
             // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
-            saveLoginDetails(item.name)
+            saveLoginDetails(item.name,item.price)
         }
 
     }
 
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData():List<Option2>{
         return arrayListOf(
-            Option("Laptop 1", R.drawable.baseline_computer_24),
-            Option("Laptop 2", R.drawable.baseline_computer_24),
-            Option("Laptop 4", R.drawable.baseline_computer_24),
-            Option("Laptop 5", R.drawable.baseline_computer_24),
-            Option("Laptop 6", R.drawable.baseline_computer_24),
-            Option("Laptop 7", R.drawable.baseline_computer_24),
-            Option("Laptop 8", R.drawable.baseline_computer_24),
-            Option("Laptop 9", R.drawable.baseline_computer_24),
-            Option("Laptop 10", R.drawable.baseline_computer_24)
+            Option2("Laptop 1", R.drawable.baseline_computer_24,499.99f),
+            Option2("Laptop 2", R.drawable.baseline_computer_24,899.99f),
+            Option2("Laptop 4", R.drawable.baseline_computer_24,399.99f),
+            Option2("Laptop 5", R.drawable.baseline_computer_24,1099.99f),
+            Option2("Laptop 6", R.drawable.baseline_computer_24,999.99f),
+            Option2("Laptop 7", R.drawable.baseline_computer_24,299.99f),
+            Option2("Laptop 8", R.drawable.baseline_computer_24,599.99f),
+            Option2("Laptop 9", R.drawable.baseline_computer_24,499.99f),
+            Option2("Laptop 10", R.drawable.baseline_computer_24,799.99f)
 
 
         )
     }
 
-    private fun saveLoginDetails(email: String) {
+    private fun saveLoginDetails(email: String,price:Float) {
         Log.i("tag","$email")
         val editor = sharedPreferences.edit()
+        Log.i("tag",price.toString())
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.putInt("image_key",R.drawable.baseline_computer_24)
+        editor.putFloat("price",price)
+        editor.commit()
         Log.i("tag","after on Detach")
 
-        when(email) {
-            "Laptop 1","Laptop 2","Laptop 4","Laptop 5"->{
-                Log.i("tag","here in settings1")
             activity?.run {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SettingsFragment1()).commit()
+                    .replace(R.id.container, ItemViewFragment()).commit()
             }}
-            "Settings 2"->
-                activity?.run{
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,SettingsFragment2()).commit()
-                }
-        }
+
 
 //        activity?.run{
 //            if(supportFragmentManager.backStackEntryCount ==0){
@@ -104,7 +100,7 @@ class Laptops1Fragment : Fragment() {
 //            }
            // FragmentContainer().onCreate2()
             //supportFragmentManager.beginTransaction().remove(SettingsFragment()).commitAllowingStateLoss()
-        }
+
         //Validation for email, password
         //
 

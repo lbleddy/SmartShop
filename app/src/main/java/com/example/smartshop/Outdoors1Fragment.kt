@@ -49,47 +49,46 @@ class Outdoors1Fragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
         recyclerView.adapter = OptionsAdapter(getOptionsData()) { item ->
             // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
-            saveLoginDetails(item.name)
+            saveLoginDetails(item.name,item.price)
         }
 
     }
 
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData():List<Option2>{
         return arrayListOf(
-            Option("Outdoors 1", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 2", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 4", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 5", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 6", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 7", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 8", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 9", R.drawable.baseline_wb_sunny_24),
-            Option("Outdoors 10", R.drawable.baseline_wb_sunny_24)
+            Option2("Outdoors 1", R.drawable.baseline_wb_sunny_24,149.99f),
+            Option2("Outdoors 2", R.drawable.baseline_wb_sunny_24,49.99f),
+            Option2("Outdoors 4", R.drawable.baseline_wb_sunny_24,19.99f),
+            Option2("Outdoors 5", R.drawable.baseline_wb_sunny_24,24.99f),
+            Option2("Outdoors 6", R.drawable.baseline_wb_sunny_24,29.99f),
+            Option2("Outdoors 7", R.drawable.baseline_wb_sunny_24,4.99f),
+            Option2("Outdoors 8", R.drawable.baseline_wb_sunny_24,5.99f),
+            Option2("Outdoors 9", R.drawable.baseline_wb_sunny_24,149.99f),
+            Option2("Outdoors 10", R.drawable.baseline_wb_sunny_24,59.99f)
 
 
         )
     }
 
-    private fun saveLoginDetails(email: String) {
+    private fun saveLoginDetails(email: String,price:Float) {
         Log.i("tag","$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.putFloat("price",price)
+        editor.putInt("image_key",when(email){
+            "Outdoors 1" -> R.drawable.baseline_wb_sunny_24
+            else->{R.drawable.baseline_wb_sunny_24}
+        })
+        editor.commit()
         Log.i("tag","after on Detach")
 
-        when(email) {
-            "Outdoors 1"->{
-                Log.i("tag","here in settings1")
+
             activity?.run {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, OutdoorsFragment1()).commit()
+                    .replace(R.id.container, ItemViewFragment()).commit()
             }}
-            "Settings 2"->
-                activity?.run{
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,SettingsFragment2()).commit()
-                }
-        }
+
 
 //        activity?.run{
 //            if(supportFragmentManager.backStackEntryCount ==0){
@@ -104,7 +103,7 @@ class Outdoors1Fragment : Fragment() {
 //            }
            // FragmentContainer().onCreate2()
             //supportFragmentManager.beginTransaction().remove(SettingsFragment()).commitAllowingStateLoss()
-        }
+
         //Validation for email, password
         //
 

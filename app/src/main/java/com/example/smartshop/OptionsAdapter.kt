@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
-class OptionsAdapter(val list: List<Option>,private var onClickListener: (Option) -> Unit) :
+class OptionsAdapter(val list: List<Option2>,private var onClickListener: (Option2) -> Unit) :
     RecyclerView.Adapter<OptionsAdapter.OptionViewHolder>(){
 
 
@@ -21,6 +21,7 @@ class OptionsAdapter(val list: List<Option>,private var onClickListener: (Option
     class OptionViewHolder(val itemView:View): RecyclerView.ViewHolder(itemView) {
             val imageView: ImageView = itemView.findViewById<ImageView>(R.id.rv_photo)
             val textView: TextView = itemView.findViewById<TextView>(R.id.optionText)
+            val textView2:TextView = itemView.findViewById<TextView>(R.id.priceText)
             val itemView1 = itemView
 
     }
@@ -36,7 +37,7 @@ class OptionsAdapter(val list: List<Option>,private var onClickListener: (Option
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OptionViewHolder {
             return OptionsAdapter.OptionViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.custom_list_item, parent, false)
+                    .inflate(R.layout.custom_list_item_phone, parent, false)
             )
     }
 
@@ -51,7 +52,7 @@ class OptionsAdapter(val list: List<Option>,private var onClickListener: (Option
 
 
 
-    fun getItem(position: Int):Option {
+    fun getItem(position: Int):Option2 {
         return list.get(position)
     }
     interface OnClickListener {
@@ -61,8 +62,10 @@ class OptionsAdapter(val list: List<Option>,private var onClickListener: (Option
     override fun onBindViewHolder(holder: OptionsAdapter.OptionViewHolder, position: Int) {
         holder.imageView.setImageResource(list.get(position).image)
         var item = list[position]
+        holder.textView2.text = list.get(position).price.toString()
         holder.textView.text = list.get(position).name
-        holder.itemView1.setOnClickListener{onClickListener(item)}
+        holder.itemView1.setOnClickListener{onClickListener(item)
+        }
 
 
         }

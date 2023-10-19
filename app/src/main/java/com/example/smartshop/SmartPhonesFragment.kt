@@ -36,17 +36,25 @@ class SmartPhonesFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
         recyclerView.adapter = OptionsAdapter(getOptionsData()){item ->
            // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
-            saveLoginDetails(item.name)
+            saveLoginDetails(item.name,item.price)
 
         }
 
 
     }
-    private fun saveLoginDetails(email: String) {
+    private fun saveLoginDetails(email: String,price:Float) {
         Log.i("tag", "$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.putFloat("price",price)
+        editor.putInt("image_key",
+            when(email){
+                "Phone 1" -> R.drawable.baseline_phone1
+                else -> {R.drawable.baseline_phone1}
+            }
+            )
 
+        editor.commit()
         Log.i("tag", "after on Detach")
 
         when (email) {
@@ -57,6 +65,7 @@ class SmartPhonesFragment : Fragment() {
 
                 Log.i("tag", "here in phones1")
                 activity?.run {
+                    Log.i("tag","${sharedPreferences.getString(HomeScreen.EMAIL_KEY,"")}")
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, ItemViewFragment()).commit()
                 }
@@ -70,17 +79,17 @@ class SmartPhonesFragment : Fragment() {
         }
     }
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData():List<Option2>{
         return arrayListOf(
-            Option("Phone 1",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 2",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 4",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 5",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 6",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 7",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 8",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 9",R.drawable.baseline_phone_iphone_24),
-            Option("Phone 10",R.drawable.baseline_phone_iphone_24)
+            Option2("Phone 1",R.drawable.baseline_phone_iphone_24,899.99f),
+            Option2("Phone 2",R.drawable.baseline_phone_iphone_24,499.99f),
+            Option2("Phone 4",R.drawable.baseline_phone_iphone_24,599.99f),
+            Option2("Phone 5",R.drawable.baseline_phone_iphone_24,799.99f),
+            Option2("Phone 6",R.drawable.baseline_phone_iphone_24,499.99f),
+            Option2("Phone 7",R.drawable.baseline_phone_iphone_24,499.99f),
+            Option2("Phone 8",R.drawable.baseline_phone_iphone_24,499.99f),
+            Option2("Phone 9",R.drawable.baseline_phone_iphone_24,499.99f),
+            Option2("Phone 10",R.drawable.baseline_phone_iphone_24,699.99f)
 
 
         )

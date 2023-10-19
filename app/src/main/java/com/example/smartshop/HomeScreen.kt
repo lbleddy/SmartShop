@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -34,22 +35,23 @@ class HomeScreen : AppCompatActivity() {
 
     private fun initViews() {
         val recyclerView = findViewById<RecyclerView>(R.id.lv_options)
-        recyclerView.adapter = OptionsAdapter(getOptionsData()){item ->
+        recyclerView.adapter = OptionsAdapter2(getOptionsData()) { item ->
             Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
             saveLoginDetails(item.name)
-            startActivity(Intent(this,FragmentContainer::class.java))
+            startActivity(Intent(this, FragmentContainer::class.java))
         }
+        val imageView = findViewById<ImageView>(R.id.btnCart).setOnClickListener {
+            val editor = sharedPreferences.edit()
+            editor.putInt("toggle",1)
+            editor.commit()
+            startActivity(Intent(this, FragmentContainer::class.java))}
 
-
-        recyclerView.setOnTouchListener { view, motionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_UP)
-                view.performClick()
-            else
-                false
-        }
-
-
-
+            recyclerView.setOnTouchListener { view, motionEvent ->
+                if (motionEvent.action == MotionEvent.ACTION_UP)
+                    view.performClick()
+                else
+                    false
+            }
 
 
 //        val data = getOptionsData()
@@ -69,6 +71,7 @@ class HomeScreen : AppCompatActivity() {
 //            }
 
         }
+
 
 
     private fun saveLoginDetails(email: String) {

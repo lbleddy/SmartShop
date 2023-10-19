@@ -68,6 +68,9 @@ class FragmentContainer : AppCompatActivity(),Communicator {
     }
 
     private fun addNewFragment() {
+        if(sharedPreferences.getInt("toggle",0)==1){
+            supportFragmentManager.beginTransaction().replace(R.id.container,CartFragment()).commit()
+        }
         Log.i("tag", "here")
         Log.i("tag","${sharedPreferences.getString("email_key","")}")
         when (sharedPreferences.getString("email_key", "")) {

@@ -47,7 +47,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val dataList = getOptionsData()
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
-        recyclerView.adapter = OptionsAdapter(getOptionsData()) { item ->
+        recyclerView.adapter = OptionsAdapter2(getOptionsData()) { item ->
             // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
             saveLoginDetails(item.name)
         }
@@ -75,20 +75,20 @@ class SettingsFragment : Fragment() {
         Log.i("tag","$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.putInt("image_key",
+            when(email){
+                "Settings 1"->R.drawable.baseline_settings_24
+                else -> {R.drawable.baseline_settings_24}
+            })
+        editor.commit()
         Log.i("tag","after on Detach")
 
-        when(email) {
-            "Settings 1"->{
-                Log.i("tag","here in settings1")
+
+
             activity?.run {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SettingsFragment1()).commit()
-            }}
-            "Settings 2"->
-                activity?.run{
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,SettingsFragment2()).commit()
-                }
+                    .replace(R.id.container, ItemViewFragment()).commit()
+
         }
 
 //        activity?.run{

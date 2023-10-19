@@ -50,46 +50,41 @@ class BrowseFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
         recyclerView.adapter = OptionsAdapter(getOptionsData()) { item ->
             // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
-            saveLoginDetails(item.name)
+            saveLoginDetails(item.name,item.price)
+
         }
 
     }
 
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData():List<Option2>{
         return arrayListOf(
-            Option("Browse 1", R.drawable.baseline_search_24),
-            Option("Browse 2", R.drawable.baseline_search_24),
-            Option("Browse 4", R.drawable.baseline_search_24),
-            Option("Browse 5", R.drawable.baseline_search_24),
-            Option("Browse 6", R.drawable.baseline_search_24),
-            Option("Browse 7", R.drawable.baseline_search_24),
-            Option("Browse 8", R.drawable.baseline_search_24),
-            Option("Browse 9", R.drawable.baseline_search_24),
-            Option("Browse 10", R.drawable.baseline_search_24)
+            Option2("Browse 1", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 2", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 4", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 5", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 6", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 7", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 8", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 9", R.drawable.baseline_search_24,49.99f),
+            Option2("Browse 10", R.drawable.baseline_search_24,49.99f)
 
 
         )
     }
 
-    private fun saveLoginDetails(email: String) {
+    private fun saveLoginDetails(email: String,price:Float) {
         Log.i("tag","$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.putFloat("price",price)
+        editor.commit()
         Log.i("tag","after on Detach")
-
-        when(email) {
-            "Browse 1","Browse 2","Browse 4"->{
-                Log.i("tag","here in settings1")
                 activity?.run {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SettingsFragment1()).commit()
-                }}
-            "Settings 2"->
-                activity?.run{
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,SettingsFragment2()).commit()
-                }
+                        .replace(R.id.container, ItemViewFragment()).commit()
+
+
         }
 
 //        activity?.run{

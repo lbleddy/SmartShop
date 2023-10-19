@@ -50,6 +50,15 @@ class WinterFragment : Fragment() {
         Log.i("tag", "$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.commit()
+
+        editor.putInt("image_key",
+            when(email){
+                "Winter 1" -> R.drawable.baseline_snowboarding_24
+                else -> {R.drawable.baseline_snowboarding_24}
+            }
+        )
+        editor.commit()
         Log.i("tag", "after on Detach")
 
         when (email) {
@@ -58,10 +67,10 @@ class WinterFragment : Fragment() {
             "Winter 9","Winter 10"
             -> {
 
-                Log.i("tag", "here in phones1")
+
                 activity?.run {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, WinterFragment1()).commit()
+                        .replace(R.id.container, ItemViewFragment()).commit()
                 }
             }
 
@@ -73,17 +82,17 @@ class WinterFragment : Fragment() {
         }
     }
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData():List<Option2>{
         return arrayListOf(
-            Option("Winter 1",R.drawable.baseline_snowboarding_24),
-            Option("Winter 2",R.drawable.baseline_snowboarding_24),
-            Option("Winter 4",R.drawable.baseline_snowboarding_24),
-            Option("Winter 5",R.drawable.baseline_snowboarding_24),
-            Option("Winter 6",R.drawable.baseline_snowboarding_24),
-            Option("Winter 7",R.drawable.baseline_snowboarding_24),
-            Option("Winter 8",R.drawable.baseline_snowboarding_24),
-            Option("Winter 9",R.drawable.baseline_snowboarding_24),
-            Option("Winter 10",R.drawable.baseline_snowboarding_24)
+            Option2("Winter 1",R.drawable.baseline_snowboarding_24,29.99f),
+            Option2("Winter 2",R.drawable.baseline_snowboarding_24,199.99f),
+            Option2("Winter 4",R.drawable.baseline_snowboarding_24,49.99f),
+            Option2("Winter 5",R.drawable.baseline_snowboarding_24,399.99f),
+            Option2("Winter 6",R.drawable.baseline_snowboarding_24,149.99f),
+            Option2("Winter 7",R.drawable.baseline_snowboarding_24,29.99f),
+            Option2("Winter 8",R.drawable.baseline_snowboarding_24,49.99f),
+            Option2("Winter 9",R.drawable.baseline_snowboarding_24,9.99f),
+            Option2("Winter 10",R.drawable.baseline_snowboarding_24,34.99f)
 
 
         )

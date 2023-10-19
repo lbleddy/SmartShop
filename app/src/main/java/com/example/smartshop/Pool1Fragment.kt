@@ -49,46 +49,43 @@ class Pool1Fragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lv_phones)
         recyclerView.adapter = OptionsAdapter(getOptionsData()) { item ->
             // Toast.makeText(this, "$item", Toast.LENGTH_SHORT).show()
-            saveLoginDetails(item.name)
+            saveLoginDetails(item.name,item.price)
         }
 
     }
 
 
-    private fun getOptionsData():List<Option>{
+    private fun getOptionsData():List<Option2>{
         return arrayListOf(
-            Option("Pool 1", R.drawable.baseline_waves_24),
-            Option("Pool 2", R.drawable.baseline_waves_24),
-            Option("Pool 4", R.drawable.baseline_waves_24),
-            Option("Pool 5", R.drawable.baseline_waves_24),
-            Option("Pool 6", R.drawable.baseline_waves_24),
-            Option("Pool 7", R.drawable.baseline_waves_24),
-            Option("Pool 8", R.drawable.baseline_waves_24),
-            Option("Pool 9", R.drawable.baseline_waves_24),
-            Option("Pool 10", R.drawable.baseline_waves_24)
+            Option2("Pool 1", R.drawable.baseline_waves_24,2999.99f),
+            Option2("Pool 2", R.drawable.baseline_waves_24,1499.99f),
+            Option2("Pool 4", R.drawable.baseline_waves_24,999.99f),
+            Option2("Pool 5", R.drawable.baseline_waves_24,1499.99f),
+            Option2("Pool 6", R.drawable.baseline_waves_24,1299.99f),
+            Option2("Pool 7", R.drawable.baseline_waves_24,1899.99f),
+            Option2("Pool 8", R.drawable.baseline_waves_24,799.99f),
+            Option2("Pool 9", R.drawable.baseline_waves_24,399.99f),
+            Option2("Pool 10", R.drawable.baseline_waves_24,4999.99f)
 
 
         )
     }
 
-    private fun saveLoginDetails(email: String) {
+    private fun saveLoginDetails(email: String,price:Float) {
         Log.i("tag","$email")
         val editor = sharedPreferences.edit()
         editor.putString(HomeScreen.EMAIL_KEY, email)
+        editor.putFloat("price",price)
+        editor.putInt("image_key",R.drawable.baseline_waves_24)
+        editor.commit()
         Log.i("tag","after on Detach")
 
-        when(email) {
-            "Pool 1","Pool 2","Pool 4","Pool 5"->{
-                Log.i("tag","here in settings1")
+
             activity?.run {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SettingsFragment1()).commit()
-            }}
-            "Settings 2"->
-                activity?.run{
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,SettingsFragment2()).commit()
-                }
+                    .replace(R.id.container, ItemViewFragment()).commit()
+            }
+
         }
 
 //        activity?.run{
@@ -104,7 +101,7 @@ class Pool1Fragment : Fragment() {
 //            }
            // FragmentContainer().onCreate2()
             //supportFragmentManager.beginTransaction().remove(SettingsFragment()).commitAllowingStateLoss()
-        }
+
         //Validation for email, password
         //
 
